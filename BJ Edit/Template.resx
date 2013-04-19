@@ -1,0 +1,336 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="body" xml:space="preserve">
+    <value>else
+                    // indexRace is a integer converted from real, so automatically add 1
+                    set indexRace = indexRace + 1
+                endif
+            else
+                set indexRace=0
+            endif
+            
+            set MC_raceindex[index] = indexRace
+
+            // debug uses.
+            //call BJDebugMsg( ( "Player"+I2S(index)+" RaceIndex:" + I2S(indexRace) ) )
+
+            // Create initial race-specific starting units</value>
+  </data>
+  <data name="body2" xml:space="preserve">
+    <value>if (indexRace == MC_RACE_[RACE]) then
+                    call PickMeleeAI(indexPlayer, "[race].ai", null, null)
+                else</value>
+  </data>
+  <data name="feet" xml:space="preserve">
+    <value>else
+                call MeleeStartingUnitsUnknownRace(indexPlayer, indexStartLoc, true, true, true)
+            endif
+        endif
+     call SetPlayerHandicap(indexPlayer, 1.00)
+     set index = index + 1
+     exitwhen index == bj_MAX_PLAYERS
+endloop
+endfunction</value>
+  </data>
+  <data name="feet2" xml:space="preserve">
+    <value>// Unrecognized race.
+                endif
+                call ShareEverythingWithTeamAI(indexPlayer)
+            endif
+        endif
+
+        set index = index + 1
+        exitwhen index == bj_MAX_PLAYERS
+    endloop
+endfunction</value>
+  </data>
+  <data name="head" xml:space="preserve">
+    <value>function MeleeStartingUnits takes nothing returns nothing
+local integer  index
+local player   indexPlayer
+local location indexStartLoc
+local integer  indexRace
+
+set index = 0
+loop
+     set indexPlayer = Player(index)
+        if (GetPlayerSlotState(indexPlayer) == PLAYER_SLOT_STATE_PLAYING) then
+            set indexStartLoc = GetStartLocationLoc(GetPlayerStartLocation(indexPlayer))
+            
+            if (GetPlayerController(indexPlayer) == MAP_CONTROL_USER) then
+                set indexRace=GetStoredInteger(MC_udg_raceindexgc, "Player"+I2S(index), "RaceIndex")
+                if (indexRace==0) then
+                    //for debug uses
+                    call DisplayTimedTextToPlayer(GetLocalPlayer(),0,0,10,"Opps, something went worng on player"+I2S(index))
+                endif
+            elseif (GetPlayerController(indexPlayer) == MAP_CONTROL_COMPUTER) then
+                set indexRace = R2I(GetPlayerHandicapBJ(indexPlayer))
+                if (indexRace == 100) then
+                    // Player choose Random</value>
+  </data>
+  <data name="head2" xml:space="preserve">
+    <value>function MeleeStartingAI takes nothing returns nothing
+    local integer index
+    local player  indexPlayer
+    local integer indexRace
+
+    set index = 0
+    loop
+        set indexPlayer = Player(index)
+        if (GetPlayerSlotState(indexPlayer) == PLAYER_SLOT_STATE_PLAYING) then
+            set indexRace = MC_raceindex[index]
+            if (GetPlayerController(indexPlayer) == MAP_CONTROL_COMPUTER) then
+                // Run a race-specific melee AI script.</value>
+  </data>
+  <data name="rigc_callfuncs" xml:space="preserve">
+    <value>call MC_InitRaceIndexGC()
+call MC_SyncRaceIndexForAll()</value>
+  </data>
+  <data name="startingunitcomment" xml:space="preserve">
+    <value>//===========================================================================
+// Starting Units for [RaceName] Players
+//   - 1 [baseID], placed at start location
+//   - 5 [peonID], placed between start location and nearest gold mine
+//
+// MC_EDITED</value>
+  </data>
+  <data name="startingunittemplate" xml:space="preserve">
+    <value>function [FuncName] takes player whichPlayer, location startLoc, boolean doHeroes, boolean doCamera, boolean doPreload returns nothing
+    local boolean  useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
+    local real     unitSpacing   = 64.00
+    local unit     nearestMine
+    local location nearMineLoc
+    local location heroLoc
+    local real     peonX
+    local real     peonY
+
+    set nearestMine = MeleeFindNearestMine(startLoc, bj_MELEE_MINE_SEARCH_RADIUS)
+    if (nearestMine != null) then
+        // Spawn Great Hall at the start location.
+        call CreateUnitAtLoc(whichPlayer, '[baseID]', startLoc, bj_UNIT_FACING)
+        
+        // Spawn Peons near the mine.
+        set nearMineLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine), startLoc, 320, 0)
+        set peonX = GetLocationX(nearMineLoc)
+        set peonY = GetLocationY(nearMineLoc)
+        call CreateUnit(whichPlayer, '[peonID]', peonX + 0.00 * unitSpacing, peonY + 1.00 * unitSpacing, bj_UNIT_FACING)
+        call CreateUnit(whichPlayer, '[peonID]', peonX + 1.00 * unitSpacing, peonY + 0.15 * unitSpacing, bj_UNIT_FACING)
+        call CreateUnit(whichPlayer, '[peonID]', peonX - 1.00 * unitSpacing, peonY + 0.15 * unitSpacing, bj_UNIT_FACING)
+        call CreateUnit(whichPlayer, '[peonID]', peonX + 0.60 * unitSpacing, peonY - 1.00 * unitSpacing, bj_UNIT_FACING)
+        call CreateUnit(whichPlayer, '[peonID]', peonX - 0.60 * unitSpacing, peonY - 1.00 * unitSpacing, bj_UNIT_FACING)
+
+        // Set random hero spawn point to be off to the side of the start location.
+        set heroLoc = MeleeGetProjectedLoc(GetUnitLoc(nearestMine), startLoc, 384, 45)
+    else
+        // Spawn Great Hall at the start location.
+        call CreateUnitAtLoc(whichPlayer, '[peonID]', startLoc, bj_UNIT_FACING)
+        
+        // Spawn Peons directly south of the town hall.
+        set peonX = GetLocationX(startLoc)
+        set peonY = GetLocationY(startLoc) - 224.00
+        call CreateUnit(whichPlayer, '[peonID]', peonX + 2.00 * unitSpacing, peonY + 0.00 * unitSpacing, bj_UNIT_FACING)
+        call CreateUnit(whichPlayer, '[peonID]', peonX + 1.00 * unitSpacing, peonY + 0.00 * unitSpacing, bj_UNIT_FACING)
+        call CreateUnit(whichPlayer, '[peonID]', peonX + 0.00 * unitSpacing, peonY + 0.00 * unitSpacing, bj_UNIT_FACING)
+        call CreateUnit(whichPlayer, '[peonID]', peonX - 1.00 * unitSpacing, peonY + 0.00 * unitSpacing, bj_UNIT_FACING)
+        call CreateUnit(whichPlayer, '[peonID]', peonX - 2.00 * unitSpacing, peonY + 0.00 * unitSpacing, bj_UNIT_FACING)
+
+        // Set random hero spawn point to be just south of the start location.
+        set heroLoc = Location(peonX, peonY - 2.00 * unitSpacing)
+    endif
+
+    if (doHeroes) then
+        // If the "Random Hero" option is set, start the player with a random hero.
+        // Otherwise, give them a "free hero" token.
+        if useRandomHero then
+            call MeleeRandomHeroLoc(whichPlayer, 'Obla', 'Ofar', 'Otch', 'Oshd', heroLoc)
+        else
+            call SetPlayerState(whichPlayer, PLAYER_STATE_RESOURCE_HERO_TOKENS, bj_MELEE_STARTING_HERO_TOKENS)
+        endif
+    endif
+
+    if (doCamera) then
+        // Center the camera on the initial Peons.
+        call SetCameraPositionForPlayer(whichPlayer, peonX, peonY)
+        call SetCameraQuickPositionForPlayer(whichPlayer, peonX, peonY)
+    endif
+endfunction</value>
+  </data>
+  <data name="sync_body" xml:space="preserve">
+    <value>//&lt;----- Sync Gamecache
+function MC_InitRaceIndexGC takes nothing returns nothing
+    if(MC_udg_raceindexgc == null)then
+        call FlushGameCache(InitGameCache("RaceIndexGC.w3v"))
+        set MC_udg_raceindexgc = InitGameCache("RaceIndexGC.w3v")
+    endif
+endfunction
+
+function MC_SyncRaceIndexForPlayer takes player p returns boolean
+    local integer x
+    local string k1
+    local string k2
+    if(GetPlayerController(p) != MAP_CONTROL_USER or GetPlayerSlotState(p)==PLAYER_SLOT_STATE_EMPTY)then
+        return false
+    endif
+    set k1 = "Player"+I2S(GetPlayerId(p))
+    set k2 = "RaceIndex"
+    call StoreInteger(MC_udg_raceindexgc,k1,"flag",-1)  //-1为未完成同步的标签  
+    if(GetLocalPlayer()==p)then
+        call SyncStoredInteger(MC_udg_raceindexgc,k1,"flag")
+        set x = GetStoredInteger(MC_udg_raceindexgc,k1,k2)
+        //下面这句GetRandomInt会导致掉线
+        //call DisplayTimedTextToPlayer(p,0,0,30,I2S(GetRandomInt(1,10)))
+        call StoreInteger(MC_udg_raceindexgc,k1,k2,GetRaceIndex())    // 存入RaceIndex
+        //下面是debug用
+        //call DisplayTimedTextToPlayer(p,0,0,30,"#DEBUG# Player"+I2S(GetPlayerId(p))+"_PrevVar:"+R2S(GetStoredReal(MC_udg_raceindexgc,k1,k2)))
+        call SyncStoredInteger(MC_udg_raceindexgc,k1,k2) 
+        call StoreInteger(MC_udg_raceindexgc,k1,k2,x)    
+        //下面3句是用作标签
+        call StoreInteger(MC_udg_raceindexgc,k1,"flag",0)  //0为完成同步后标签
+        call SyncStoredInteger(MC_udg_raceindexgc,k1,"flag") 
+        call StoreInteger(MC_udg_raceindexgc,k1,"flag",-1)
+    endif
+    loop
+        exitwhen(GetPlayerSlotState(p)==PLAYER_SLOT_STATE_LEFT)
+        call TriggerSleepAction(0.00)
+        if(GetStoredInteger(MC_udg_raceindexgc,k1,"flag")==0)then
+            return true
+        endif
+    endloop
+    return false
+endfunction
+
+function MC_SyncRaceIndexForAll takes nothing returns nothing
+    local integer i = 0
+    call EnableUserControl( false )
+    call CinematicFadeBJ( bj_CINEFADETYPE_FADEIN, 999999.00, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0 )
+    call DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, 60.00, "Syncing Data...")
+    loop
+        call MC_SyncRaceIndexForPlayer(Player(i))
+        set i = i + 1
+        exitwhen i == bj_MAX_PLAYERS
+    endloop
+    call EnableUserControl( true )
+    call CinematicFadeBJ( bj_CINEFADETYPE_FADEIN, 0.50, "ReplaceableTextures\\CameraMasks\\Black_mask.blp", 0, 0, 0, 0 )
+    call ClearTextMessages()
+    call DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, 0.10, "Sync Complete.")
+endfunction
+//------&gt; End</value>
+  </data>
+</root>
