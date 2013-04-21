@@ -280,9 +280,9 @@ namespace BJ_Edit
             button6.Enabled = true;
             button7.Enabled = true;
             button8.Enabled = true;
-            button11.Enabled = true;
-            button10.Enabled = true;
-            button13.Enabled = true;
+            if (File.Exists(@"Input\war3map.wts")) { button11.Enabled = true; } else { button11.Enabled = false; }
+            if (File.Exists(@"Input\war3map.j")) { button10.Enabled = true; } else { button10.Enabled = false; }
+            if (File.Exists(@"Input\war3mapMisc.txt")) { button13.Enabled = true; } else { button13.Enabled = false; }
             Fname.Items.Clear();
             Fcontent.Text = "";
             Fdescriptions.Text = "";
