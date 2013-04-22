@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Collections;
 using System.IO;
+using System.Threading;
 
 namespace wtsTransfer
 {
@@ -14,11 +15,50 @@ namespace wtsTransfer
     {
         public Form1()
         {
+            System.Globalization.CultureInfo UICulture = new System.Globalization.CultureInfo("en-GB");
+            Thread.CurrentThread.CurrentUICulture = UICulture;
             InitializeComponent();
         }
 
         public int pos = 0;
         public StreamWriter inilist_sw = null;
+
+        public static string ToHexString(byte[] bytes) // 0xae00cf => "AE00CF "
+        {
+            string hexString = string.Empty;
+            if (bytes != null)
+            {
+                StringBuilder strB = new StringBuilder();
+
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    strB.Append(bytes[i].ToString("X2"));
+                }
+                hexString = strB.ToString();
+            }
+            return hexString;
+        }
+
+        public byte[] ReplaceBytes(byte[] src, string replace, string replacewith)
+        {
+            string hex = BitConverter.ToString(src);
+            hex = hex.Replace("-", "");
+            hex = hex.Replace(replace, replacewith);
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
+        }
+
+        public void TransferStatus(bool IsTransfering)
+        {
+            button1.Enabled = !IsTransfering;
+            button2.Enabled = !IsTransfering;
+            button3.Enabled = !IsTransfering;
+            button4.Enabled = !IsTransfering;
+            button5.Enabled = !IsTransfering;
+        }
 
         public void RestoreFileString(string file, string[] stringlist, string pretext, bool editprogressbar=false)
         {
@@ -42,11 +82,41 @@ namespace wtsTransfer
                 string[] tmps = stringlist[i].Split(new[] { '|' }, 2, StringSplitOptions.RemoveEmptyEntries);
                 //tmps[0] - Index / tmps[1] - value
                 files = files.Replace(pretext + tmps[0].Trim(), tmps[1].Trim());
-                if (editprogressbar) { progressBar1.PerformStep(); }
+                if (editprogressbar) { progressBar1.PerformStep(); Application.DoEvents(); }
             }
             StreamWriter wts_sw = new StreamWriter(file);
             wts_sw.Write(files);
             wts_sw.Close();
+        }
+
+        public void RestoreFileStringFromW3i(string w3ifile, string[] stringlist, string pretext, bool editprogressbar = false)
+        {
+            if (editprogressbar)
+            {
+                //用于设置进度条。
+                progressBar1.Minimum = 0;
+                progressBar1.Maximum = stringlist.Length;
+                progressBar1.Step = 1;
+                progressBar1.Value = 0;
+            }
+
+            //读取w3i
+            FileStream fs = new FileStream(w3ifile, FileMode.Open, FileAccess.ReadWrite);
+            byte[] ss=new byte[fs.Length];
+            fs.Read(ss, 0, (int)fs.Length);
+            fs.Close();
+            //开始替换
+            for (int i = stringlist.Length - 1; i >= 0; i--)    //逆序排序，从大到小不会重复。
+            {
+                string[] tmps = stringlist[i].Split(new[] { '|' }, 2, StringSplitOptions.RemoveEmptyEntries);
+                byte[] source = System.Text.Encoding.UTF8.GetBytes(pretext + tmps[0].Trim());
+                byte[] target = System.Text.Encoding.UTF8.GetBytes(tmps[1].Trim());
+                ss = ReplaceBytes(ss, ToHexString(source), ToHexString(target));
+                if (editprogressbar) { progressBar1.PerformStep(); Application.DoEvents(); }    //进度条
+            }
+            FileStream fsw = new FileStream(w3ifile, FileMode.Create, FileAccess.Write);
+            fsw.Write(ss,0,ss.Length);
+            fsw.Close();
         }
 
         public bool HasChinese(string CString)
@@ -142,17 +212,17 @@ namespace wtsTransfer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string WidgetzInputFolder = Application.StartupPath+@"\Widgetizer\Input";
-            if (!Directory.Exists(WidgetzInputFolder))
-            {   //不存在Widgetizer，需用户自行定义。
-                if (folderBrowserDialog1.ShowDialog() == DialogResult.Cancel) { return; }
-                else { WidgetzInputFolder = folderBrowserDialog1.SelectedPath; }
+            string WidgetzInputFolder = "";
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                WidgetzInputFolder = folderBrowserDialog1.SelectedPath;
             }
+            else { return; }
             //备份input文件夹
             if (Directory.Exists(@"Input_bak")) { Directory.Delete(@"Input_bak", true); }
             FileIO.CopyDirectory(WidgetzInputFolder, @"Input_bak");
@@ -170,7 +240,8 @@ namespace wtsTransfer
             foreach (FileInfo NextFile in TheFolder.GetFiles())
             {
                 //进度条
-                ((Form1)Application.OpenForms[0]).progressBar1.PerformStep();
+                progressBar1.PerformStep();
+                Application.DoEvents();
                 //MessageBox.Show(NextFile.FullName);
                 switch (NextFile.Extension) {
                     case ".slk":    //slk不处理
@@ -213,15 +284,22 @@ namespace wtsTransfer
         {
             //选择inifilelist；
             openFileDialog2.FileName = "inilist.txt";
+            if (openFileDialog2.ShowDialog() != DialogResult.OK) { return; }
+            string inidata = openFileDialog2.FileName;
+            openFileDialog2.FileName = "wts_data.txt";
             if (openFileDialog2.ShowDialog() == DialogResult.OK)
             {
-                StreamReader sr = new StreamReader(openFileDialog2.FileName);
-
-                string[] ss = sr.ReadToEnd().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                string wtsdata = openFileDialog2.FileName;
+                StreamReader sr = new StreamReader(inidata);
+                string[] iniss = sr.ReadToEnd().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                 sr.Close();
+                StreamReader sr2 = new StreamReader(wtsdata);
+                string[] wtsss = sr2.ReadToEnd().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                sr2.Close();
 
                 if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
                 {
+                    TransferStatus(true);
                     //遍历文件夹
                     DirectoryInfo TheFolder = new DirectoryInfo(folderBrowserDialog1.SelectedPath);
                     FileInfo[] TheFiles = TheFolder.GetFiles();
@@ -232,15 +310,65 @@ namespace wtsTransfer
                     progressBar1.Value = 0;
                     foreach (FileInfo NextFile in TheFolder.GetFiles())
                     {
-                        RestoreFileString(NextFile.FullName, ss, "INI_STRING "); //it also comes with the "GAME_STRING "
+                        if (NextFile.Extension == ".txt" || NextFile.Extension == ".fdf")
+                        {
+                            RestoreFileString(NextFile.FullName, iniss, "INI_STRING "); //it also comes with the "GAME_STRING "
+                            Application.DoEvents();
+                            RestoreFileString(NextFile.FullName, wtsss, "GAME_STRING ");
+                            Application.DoEvents();
+                        }
                         progressBar1.PerformStep();
                         Application.DoEvents();
-                        this.Refresh();
                     }
+                    TransferStatus(false);
                     MessageBox.Show("Finish!");
                 }
             }
-            openFileDialog2.FileName = "wts_data.txt";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog2.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader sr = new StreamReader(openFileDialog2.FileName);
+                string[] ss = sr.ReadToEnd().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                sr.Close();
+
+                if (openFileDialog3.ShowDialog() == DialogResult.OK)
+                {
+                    TransferStatus(true);
+                    RestoreFileStringFromW3i(openFileDialog3.FileName, ss, "GAME_STRING ", true);
+                }
+                TransferStatus(false);
+                MessageBox.Show("Finish!");
+            }
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Language_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.FlatAppearance.BorderSize = 0;
+            Point point = new Point(btn.Left + this.Left + 5, btn.Top + this.Top + 40);
+            contextMenuStrip1.Show(point);
+        }
+
+        private void englishToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BJ_Edit.SetLanguage.SetLang("en-GB", this, this.GetType(),toolTip1);
+        }
+
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BJ_Edit.SetLanguage.SetLang("zh-CHS", this, this.GetType(),toolTip1);
+        }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
         }
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJ Edit", "BJ Edit\BJ Edit.csproj", "{A813AEAD-1C0C-467C-83B8-F59056D4B63B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wtsTransfer", "wtsTransfer\wtsTransfer\wtsTransfer.csproj", "{00CD9929-8A08-4C69-B1ED-2F62999C0F74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniStringTransferTool", "wtsTransfer\UniStringTransferTool.csproj", "{00CD9929-8A08-4C69-B1ED-2F62999C0F74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -70,10 +70,9 @@
             // 
             // button1
             // 
-            resources.ApplyResources(this.button1, "button1");
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
-            this.toolTip1.SetToolTip(this.button1, resources.GetString("button1.ToolTip"));
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -81,23 +80,20 @@
             // 
             resources.ApplyResources(this.Fdescriptions, "Fdescriptions");
             this.Fdescriptions.Name = "Fdescriptions";
-            this.toolTip1.SetToolTip(this.Fdescriptions, resources.GetString("Fdescriptions.ToolTip"));
             // 
             // Fcontent
             // 
             resources.ApplyResources(this.Fcontent, "Fcontent");
             this.Fcontent.Name = "Fcontent";
-            this.toolTip1.SetToolTip(this.Fcontent, resources.GetString("Fcontent.ToolTip"));
             this.Fcontent.TextChanged += new System.EventHandler(this.Fcontent_TextChanged);
             // 
             // Fname
             // 
-            resources.ApplyResources(this.Fname, "Fname");
             this.Fname.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.Fname.ForeColor = System.Drawing.SystemColors.WindowText;
             this.Fname.FormattingEnabled = true;
+            resources.ApplyResources(this.Fname, "Fname");
             this.Fname.Name = "Fname";
-            this.toolTip1.SetToolTip(this.Fname, resources.GetString("Fname.ToolTip"));
             this.Fname.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.Fname_DrawItem);
             this.Fname.SelectedIndexChanged += new System.EventHandler(this.Fname_SelectedIndexChanged);
             // 
@@ -105,7 +101,6 @@
             // 
             resources.ApplyResources(this.button3, "button3");
             this.button3.Name = "button3";
-            this.toolTip1.SetToolTip(this.button3, resources.GetString("button3.ToolTip"));
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -121,7 +116,6 @@
             // 
             resources.ApplyResources(this.button5, "button5");
             this.button5.Name = "button5";
-            this.toolTip1.SetToolTip(this.button5, resources.GetString("button5.ToolTip"));
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -129,14 +123,12 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.toolTip1.SetToolTip(this.label2, resources.GetString("label2.ToolTip"));
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button6
@@ -196,7 +188,6 @@
             // 
             resources.ApplyResources(this.button12, "button12");
             this.button12.Name = "button12";
-            this.toolTip1.SetToolTip(this.button12, resources.GetString("button12.ToolTip"));
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -204,7 +195,6 @@
             // 
             resources.ApplyResources(this.button13, "button13");
             this.button13.Name = "button13";
-            this.toolTip1.SetToolTip(this.button13, resources.GetString("button13.ToolTip"));
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click_1);
             // 
@@ -212,7 +202,6 @@
             // 
             resources.ApplyResources(this.button14, "button14");
             this.button14.Name = "button14";
-            this.toolTip1.SetToolTip(this.button14, resources.GetString("button14.ToolTip"));
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -226,16 +215,15 @@
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.groupBox1, resources.GetString("groupBox1.ToolTip"));
             this.groupBox1.UseCompatibleTextRendering = true;
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
@@ -243,21 +231,18 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.toolTip1.SetToolTip(this.label3, resources.GetString("label3.ToolTip"));
             // 
             // label4
             // 
             resources.ApplyResources(this.label4, "label4");
             this.label4.ForeColor = System.Drawing.Color.Red;
             this.label4.Name = "label4";
-            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.toolTip1.SetToolTip(this.label5, resources.GetString("label5.ToolTip"));
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
@@ -265,13 +250,11 @@
             resources.ApplyResources(this.label6, "label6");
             this.label6.BackColor = System.Drawing.Color.LightGreen;
             this.label6.Name = "label6";
-            this.toolTip1.SetToolTip(this.label6, resources.GetString("label6.ToolTip"));
             // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
-            this.toolTip1.SetToolTip(this.label7, resources.GetString("label7.ToolTip"));
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // toolTip1
@@ -281,41 +264,37 @@
             // button15
             // 
             resources.ApplyResources(this.button15, "button15");
-            this.button15.ContextMenuStrip = this.contextMenuStrip1;
             this.button15.FlatAppearance.BorderSize = 0;
             this.button15.Name = "button15";
-            this.toolTip1.SetToolTip(this.button15, resources.GetString("button15.ToolTip"));
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click_1);
             // 
             // contextMenuStrip1
             // 
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.toolStripMenuItem2});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.ShowImageMargin = false;
-            this.toolTip1.SetToolTip(this.contextMenuStrip1, resources.GetString("contextMenuStrip1.ToolTip"));
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // toolStripMenuItem1
             // 
-            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
             // 
-            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            resources.ApplyResources(this.toolStripMenuItem2, "toolStripMenuItem2");
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // button16
             // 
             resources.ApplyResources(this.button16, "button16");
             this.button16.Name = "button16";
-            this.toolTip1.SetToolTip(this.button16, resources.GetString("button16.ToolTip"));
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click_1);
             // 
@@ -323,7 +302,6 @@
             // 
             resources.ApplyResources(this.button17, "button17");
             this.button17.Name = "button17";
-            this.toolTip1.SetToolTip(this.button17, resources.GetString("button17.ToolTip"));
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click_1);
             // 
@@ -359,7 +337,6 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.Fdescriptions);
             this.Name = "Form1";
-            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.groupBox1.ResumeLayout(false);
