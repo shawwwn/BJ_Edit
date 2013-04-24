@@ -13,6 +13,33 @@ namespace wtsTransfer
 {
     public partial class Form1 : Form
     {
+        #region Units文件夹下还原列表
+        string[] unitsfilelist = {"CampaignAbilityStrings.txt",
+                                  "CampaignUnitStrings.txt",
+                                  "CampaignUpgradeStrings.txt",
+                                  "CommandStrings.txt",
+                                  "CommonAbilityStrings.txt",
+                                  "GlobalStrings.fdf",
+                                  "HumanAbilityStrings.txt",
+                                  "HumanUnitStrings.txt",
+                                  "HumanUpgradeStrings.txt",
+                                  "ItemAbilityStrings.txt",
+                                  "ItemStrings.txt",
+                                  "NeutralAbilityStrings.txt",
+                                  "NeutralUnitStrings.txt",
+                                  "NeutralUpgradeStrings.txt",
+                                  "NightElfAbilityStrings.txt",
+                                  "NightElfUnitStrings.txt",
+                                  "NightElfUpgradeStrings.txt",
+                                  "OrcAbilityStrings.txt",
+                                  "OrcUnitStrings.txt",
+                                  "OrcUpgradeStrings.txt",
+                                  "UndeadAbilityStrings.txt",
+                                  "UndeadUnitStrings.txt",
+                                  "UndeadUpgradeStrings.txt",
+                                  "UnitGlobalStrings.txt"
+                                 };
+        #endregion
         public Form1()
         {
             System.Globalization.CultureInfo UICulture = new System.Globalization.CultureInfo("en-GB");
@@ -22,6 +49,22 @@ namespace wtsTransfer
 
         public int pos = 0;
         public StreamWriter inilist_sw = null;
+        Image btnimg1;
+
+        private void PackAllFileToMpq(string path, string basepath, MpqLib.Mpq.CArchive mpq)
+        {
+            DirectoryInfo dir = new DirectoryInfo(path);
+            foreach (FileInfo fChild in dir.GetFiles("*")) //设置文件类型
+            {
+                string mpqpath = fChild.FullName.Replace(basepath + @"\", "");
+                mpq.ImportFile(mpqpath, fChild.FullName);
+            }
+
+            foreach (DirectoryInfo dChild in dir.GetDirectories("*")) //操作子目录
+            {
+                PackAllFileToMpq(dChild.FullName, basepath, mpq); //递归
+            }
+        }
 
         public static string ToHexString(byte[] bytes) // 0xae00cf => "AE00CF "
         {
@@ -58,6 +101,9 @@ namespace wtsTransfer
             button3.Enabled = !IsTransfering;
             button4.Enabled = !IsTransfering;
             button5.Enabled = !IsTransfering;
+            button7.Enabled = !IsTransfering;
+            button8.Enabled = !IsTransfering;
+            button9.Enabled = !IsTransfering;
         }
 
         public void RestoreFileString(string file, string[] stringlist, string pretext, bool editprogressbar=false)
@@ -210,20 +256,47 @@ namespace wtsTransfer
             }
         }
 
+        private void refreshfrm()
+        {
+            label1.Text = "";
+            if (File.Exists("inilist.txt") && new FileInfo("inilist.txt").Length != 0)
+            {
+                StreamReader tempr = new StreamReader("inilist.txt");
+                if (tempr.ReadToEnd().Trim() == "")
+                {
+                    button8.Image = null;
+                }
+                else
+                { button8.Image = btnimg1; }
+                tempr.Close();
+                tempr.Dispose();
+            }
+            else
+            {
+                button8.Image = null;
+            }
+            if (checkBox1.Checked)
+            { this.Height = 350; }
+            else
+            { this.Height = 190; }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
+            btnimg1 = button8.Image;
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            refreshfrm();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             string WidgetzInputFolder = "";
-            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            if (WidgetizerFolderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                WidgetzInputFolder = folderBrowserDialog1.SelectedPath;
+                WidgetzInputFolder = WidgetizerFolderBrowserDialog.SelectedPath+@"\Input";
             }
             else { return; }
             //备份input文件夹
+            TransferStatus(true);
             if (Directory.Exists(@"Input_bak")) { Directory.Delete(@"Input_bak", true); }
             FileIO.CopyDirectory(WidgetzInputFolder, @"Input_bak");
 
@@ -254,12 +327,13 @@ namespace wtsTransfer
                         break;
                 }
             }
-
-            MessageBox.Show("Successfully transfered " + pos.ToString() + " strings.", "Finish!");
+            TransferStatus(false);
             //释放句柄
             inilist_sw.Close();
             inilist_sw.Dispose();
             inilist_sw = null;
+            refreshfrm();
+            MessageBox.Show("Successfully transfered " + pos.ToString() + " strings.", "Finish!");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -297,11 +371,11 @@ namespace wtsTransfer
                 string[] wtsss = sr2.ReadToEnd().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                 sr2.Close();
 
-                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                if (WidgetizerFolderBrowserDialog.ShowDialog() == DialogResult.OK)
                 {
                     TransferStatus(true);
                     //遍历文件夹
-                    DirectoryInfo TheFolder = new DirectoryInfo(folderBrowserDialog1.SelectedPath);
+                    DirectoryInfo TheFolder = new DirectoryInfo(WidgetizerFolderBrowserDialog.SelectedPath+@"\Input");
                     FileInfo[] TheFiles = TheFolder.GetFiles();
                     //用于设置进度条。
                     progressBar1.Minimum = 0;
@@ -321,6 +395,7 @@ namespace wtsTransfer
                         Application.DoEvents();
                     }
                     TransferStatus(false);
+                    refreshfrm();
                     MessageBox.Show("Finish!");
                 }
             }
@@ -340,6 +415,7 @@ namespace wtsTransfer
                     RestoreFileStringFromW3i(openFileDialog3.FileName, ss, "GAME_STRING ", true);
                 }
                 TransferStatus(false);
+                refreshfrm();
                 MessageBox.Show("Finish!");
             }
         }
@@ -360,15 +436,171 @@ namespace wtsTransfer
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BJ_Edit.SetLanguage.SetLang("en-GB", this, this.GetType(),toolTip1);
+            refreshfrm();
         }
 
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BJ_Edit.SetLanguage.SetLang("zh-CHS", this, this.GetType(),toolTip1);
+            refreshfrm();
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (openMapDialog.ShowDialog() == DialogResult.OK)
+            {
+                TransferStatus(true);
+                if (Directory.Exists("map")) { Directory.Delete("map", true); }
+                Directory.CreateDirectory(@"map\Units");
+                #region ---解压mpq---
+                //开始解压文件
+                label1.Text = "Extracting Files...";
+                //用于设置进度条。
+                progressBar1.Minimum = 0;
+                progressBar1.Maximum = unitsfilelist.GetLength(0);
+                progressBar1.Step = 1;
+                progressBar1.Value = 0;
+                MpqLib.Mpq.CArchive map = new MpqLib.Mpq.CArchive(openMapDialog.FileName);
+                for (int i = 0; i < unitsfilelist.Length; i++)
+                {
+                    progressBar1.PerformStep();
+                    string filename = @"Units\" + unitsfilelist[i];
+                    if (map.FileExists(filename))
+                    {
+                        map.ExportFile(filename, @"map\Units\" + unitsfilelist[i]);
+                    }
+                }
+                if (map.FileExists(@"war3map.w3i"))   //解w3i
+                { map.ExportFile(@"war3map.w3i", @"map\" + @"war3map.w3i"); }
+
+                if (map.FileExists(@"war3map.wts"))   //解wts
+                { map.ExportFile(@"war3map.wts", @"map\" + @"war3map.wts"); }
+
+                //map.Close();
+                #endregion
+                #region ---读取stringlist---
+                label1.Text = "Load string list...";
+                string inidata = @"inilist.txt";
+                string wtsdata = @"wts_data.txt";
+                if (!File.Exists(inidata)) { MessageBox.Show("inilist.txt missing"); return; }
+                StreamReader sr = new StreamReader(inidata);
+                string[] iniss = sr.ReadToEnd().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                sr.Close();
+                if (!File.Exists(wtsdata)) { MessageBox.Show("wts_data.txt missing"); return; }
+                StreamReader sr2 = new StreamReader(wtsdata);
+                string[] wtsss = sr2.ReadToEnd().Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                sr2.Close();
+                #endregion
+                #region ---还原w3i---
+                if (File.Exists(@"map\war3map.w3i"))
+                {
+                    label1.Text = "Restoring war3map.w3i...";
+                    RestoreFileStringFromW3i(@"map\war3map.w3i", wtsss, "GAME_STRING ", true);
+                }
+                #endregion
+                #region ---还原wts---
+                if (File.Exists(@"map\war3map.wts"))
+                {
+                    label1.Text = "Restoring war3map.wts...";
+                    RestoreFileString(@"map\war3map.wts", wtsss, "GAME_STRING ", true);
+                }
+                #endregion
+                #region ---还原slk---
+                label1.Text = "Restoring slk...";
+                //遍历文件夹
+                DirectoryInfo TheFolder = new DirectoryInfo(@"map\Units");
+                FileInfo[] TheFiles = TheFolder.GetFiles();
+                //用于设置进度条。
+                progressBar1.Minimum = 0;
+                progressBar1.Maximum = TheFiles.GetLength(0);
+                progressBar1.Step = 1;
+                progressBar1.Value = 0;
+                foreach (FileInfo NextFile in TheFolder.GetFiles())
+                {
+                    if (NextFile.Extension == ".txt" || NextFile.Extension == ".fdf")
+                    {
+                        RestoreFileString(NextFile.FullName, iniss, "INI_STRING "); //it also comes with the "GAME_STRING "
+                        Application.DoEvents();
+                        RestoreFileString(NextFile.FullName, wtsss, "GAME_STRING ");
+                        Application.DoEvents();
+                    }
+                    progressBar1.PerformStep();
+                    Application.DoEvents();
+                }
+                #endregion
+                #region ---重新压入地图---
+                //war3map.j导入
+                if (File.Exists("war3map.j")) { File.Copy("war3map.j", @"map\war3map.j", true); }
+                //war3mapMisc.txt导入
+                if (File.Exists("war3mapMisc.txt")) { File.Copy("war3mapMisc.txt", @"map\war3mapMisc.txt", true); }
+                label1.Text = "Import to map...";
+                PackAllFileToMpq(Application.StartupPath + @"\map", Application.StartupPath + @"\map", map);
+                map.Flush();
+                map.Compact();
+                map.Close();
+                #endregion
+                label1.Text = "Finish.";
+                TransferStatus(false);
+                refreshfrm();
+                MessageBox.Show("Finish!");
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            refreshfrm();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (button8.Image != null)
+            {
+                if (MessageBox.Show("It seems that you had already run this before.." + Environment.NewLine + Environment.NewLine + "Click 'OK' to continue and overwrite the current data.", "reminder", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) != DialogResult.OK)
+                {
+                    return;
+                }
+            }
+            button2.PerformClick();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (openMapDialog.ShowDialog() == DialogResult.OK)
+            {
+                if (File.Exists("war3map_edited.wts")) { File.Delete("war3map_edited.wts"); }
+                if (File.Exists("war3map.j")) { File.Delete("war3map.j"); }
+                if (File.Exists("war3mapMisc.txt")) { File.Delete("war3mapMisc.txt"); }
+                //导出文件
+                MpqLib.Mpq.CArchive map = new MpqLib.Mpq.CArchive(openMapDialog.FileName);
+                if (map.FileExists("war3map.j")) { map.ExportFile("war3map.j", "war3map.j"); }
+                if (map.FileExists("war3mapMisc.txt")) { map.ExportFile("war3mapMisc.txt", "war3mapMisc.txt"); }
+                if (map.FileExists("war3map.wts")) { map.ExportFile("war3map.wts", "war3map_edited.wts"); }
+                else
+                {
+                    label1.Text = "war3map.wts doesn't exist in this map.";
+                    map.Close(); 
+                    return;
+                }
+                TransferStatus(true);
+                label1.Text = "Transfering strings from war3map.wts...";
+                wts_file wts = new wts_file("war3map_edited.wts");
+                wts.SaveStripDataFile(true);
+                wts.StringMapping();
+                //打包进地图
+                map.ImportFile("war3map.wts", "war3map_edited.wts");
+                map.Flush();
+                map.Compact();
+                map.Close();
+                if (File.Exists("war3map_edited.wts")) { File.Delete("war3map_edited.wts"); }
+                TransferStatus(false);
+                refreshfrm();
+                label1.Text = "Finish.";
+                MessageBox.Show("Finish!");
+            }
         }
     }
 }

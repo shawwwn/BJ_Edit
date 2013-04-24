@@ -71,27 +71,27 @@ namespace wtsTransfer
             //MessageBox.Show(((wts_structure)wts_stringlist[1992]).str);
             wts.Close();
         }
-    
-        public void SaveStripDataFile()
+
+        public string SaveStripDataFile(bool usedefaultpath = false)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.FileName = "wts_data.txt";
-            sfd.Filter = "*.txt|text file";
-            sfd.Title = "Save to..";
-            sfd.ShowDialog();
-            //MessageBox.Show(sfd.FileName);
-            if (sfd.FileName != "")
+            string filename = "wts_data.txt";
+            if (usedefaultpath == false)
             {
-                StreamWriter sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8);
-                for (int i = 0; i < wts_stringlist.Count; i++)
-                {
-                    wts_structure temp=(wts_structure)wts_stringlist[i];
-                    sw.WriteLine(temp.index.ToString() + " | " + temp.str);
-                }
-                sw.Close();
-                MessageBox.Show("Save file at:" + Environment.NewLine + sfd.FileName);
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.FileName = "wts_data.txt";
+                sfd.Filter = "*.txt|text file";
+                sfd.Title = "Save to..";
+                if (sfd.ShowDialog() != DialogResult.OK) { return ""; }
+                else { filename = sfd.FileName; }
             }
-            else { return; }
+            StreamWriter sw = new StreamWriter(filename, false, Encoding.UTF8);
+            for (int i = 0; i < wts_stringlist.Count; i++)
+            {
+                wts_structure temp = (wts_structure)wts_stringlist[i];
+                sw.WriteLine(temp.index.ToString() + " | " + temp.str);
+            }
+            sw.Close();
+            return filename;
         }
 
         public void StringMapping()

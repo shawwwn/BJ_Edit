@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BJ Edit", "BJ Edit\BJ Edit.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniStringTransferTool", "wtsTransfer\UniStringTransferTool.csproj", "{00CD9929-8A08-4C69-B1ED-2F62999C0F74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackMPQ", "PackMPQ\PackMPQ.csproj", "{D46FD882-A056-48E1-8735-3E44BD80E640}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +21,10 @@ Global
 		{00CD9929-8A08-4C69-B1ED-2F62999C0F74}.Debug|x86.Build.0 = Debug|x86
 		{00CD9929-8A08-4C69-B1ED-2F62999C0F74}.Release|x86.ActiveCfg = Release|x86
 		{00CD9929-8A08-4C69-B1ED-2F62999C0F74}.Release|x86.Build.0 = Release|x86
+		{D46FD882-A056-48E1-8735-3E44BD80E640}.Debug|x86.ActiveCfg = Debug|x86
+		{D46FD882-A056-48E1-8735-3E44BD80E640}.Debug|x86.Build.0 = Debug|x86
+		{D46FD882-A056-48E1-8735-3E44BD80E640}.Release|x86.ActiveCfg = Release|x86
+		{D46FD882-A056-48E1-8735-3E44BD80E640}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

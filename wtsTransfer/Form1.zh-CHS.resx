@@ -132,6 +132,9 @@
 你可以随时删除Widgetizer的'Input'文件夹，它会在启动时自动获取新的。
 原来的'Input'文件夹会被备份为'Input_bak')</value>
   </data>
+  <data name="progressBar1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="button3.Text" xml:space="preserve">
     <value>还原 war3map.wts</value>
   </data>
@@ -155,11 +158,72 @@
   <data name="button5.ToolTip" xml:space="preserve">
     <value>解压并选择转换后地图中的'war3map.w3i'</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 22</value>
+  <data name="Button6.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 22</value>
+  <data name="contextMenuStrip1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="button8.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="button8.Text" xml:space="preserve">
+    <value>预处理 Widgetizer</value>
+  </data>
+  <data name="button8.ToolTip" xml:space="preserve">
+    <value>通常情况下你只需要运行一次</value>
+  </data>
+  <data name="button7.Text" xml:space="preserve">
+    <value>还原地图</value>
+  </data>
+  <data name="button7.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="checkBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 16</value>
+  </data>
+  <data name="checkBox1.Text" xml:space="preserve">
+    <value>高级选项</value>
+  </data>
+  <data name="checkBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="button9.Text" xml:space="preserve">
+    <value>打开地图</value>
+  </data>
+  <data name="button9.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

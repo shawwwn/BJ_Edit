@@ -46,6 +46,7 @@ namespace BJ_Edit
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             this.AddOwnedForm(frm2);
            /*
             Form2 frm = new Form2();
@@ -709,11 +710,11 @@ namespace BJ_Edit
         {
             try
             {
-                System.Diagnostics.Process.Start("Packn.exe");
+                System.Diagnostics.Process.Start("PackMPQ.exe");
             }
             catch
             {
-                MessageBox.Show("Can not execute 'Packn.exe', file may be missing..","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Can not execute 'PackMPQ.exe', file may be missing..","Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
