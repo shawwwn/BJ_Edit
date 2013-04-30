@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniStringTransferTool", "wt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackMPQ", "PackMPQ\PackMPQ.csproj", "{D46FD882-A056-48E1-8735-3E44BD80E640}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wc3LocalizationTool", "Wc3LocalizationTool\Wc3LocalizationTool.csproj", "{DA7B2DCB-A7C7-4FC6-9057-53003F92DEF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -25,6 +27,10 @@ Global
 		{D46FD882-A056-48E1-8735-3E44BD80E640}.Debug|x86.Build.0 = Debug|x86
 		{D46FD882-A056-48E1-8735-3E44BD80E640}.Release|x86.ActiveCfg = Release|x86
 		{D46FD882-A056-48E1-8735-3E44BD80E640}.Release|x86.Build.0 = Release|x86
+		{DA7B2DCB-A7C7-4FC6-9057-53003F92DEF1}.Debug|x86.ActiveCfg = Debug|x86
+		{DA7B2DCB-A7C7-4FC6-9057-53003F92DEF1}.Debug|x86.Build.0 = Debug|x86
+		{DA7B2DCB-A7C7-4FC6-9057-53003F92DEF1}.Release|x86.ActiveCfg = Release|x86
+		{DA7B2DCB-A7C7-4FC6-9057-53003F92DEF1}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
