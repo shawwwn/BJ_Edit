@@ -29,10 +29,14 @@ namespace BJ_Edit
         private string GetVebName(string VebS)
         {
             if (VebS.IndexOf(" array ") == -1)
-                return (VebS.Substring(VebS.IndexOf(" "), (VebS.IndexOf("=") - VebS.IndexOf(" ")))).Trim();
+            {
+                int len = VebS.IndexOf("=");
+                if (len == -1) { len = VebS.Length - 1 - VebS.IndexOf(" "); } else { len = len - VebS.IndexOf(" "); }
+                return (VebS.Substring(VebS.IndexOf(" "), len)).Trim();
+            }
             else
-            { 
-                return (VebS.Substring(VebS.IndexOf(" array ")+7,VebS.Length-VebS.IndexOf(" array ")-7));
+            {
+                return (VebS.Substring(VebS.IndexOf(" array ") + 7, VebS.Length - VebS.IndexOf(" array ") - 7));
             }
         }
 
@@ -101,7 +105,11 @@ namespace BJ_Edit
                                 while (GetFuncName(line = w3j.ReadLine()) != "InitTrig_" + trgFuncName) { }
                                 line = w3j.ReadLine().Trim();
                                 //将触发变量名加入WEonly_Trigs列表
-                                WEonly_Trigs = WEonly_Trigs + line.Substring(line.IndexOf(" ") + 1, line.LastIndexOf("=") - line.IndexOf(" ") - 1) + Environment.NewLine;
+                                int len = 0;
+                                if (line.LastIndexOf("=") != -1)
+                                { len = line.LastIndexOf("=") - line.IndexOf(" ") - 1; }
+                                else { len = line.Length - line.IndexOf(" "); }
+                                WEonly_Trigs = WEonly_Trigs + line.Substring(line.IndexOf(" "), len) + Environment.NewLine;
                                 while ((line = w3j.ReadLine()).Trim() != "endfunction") { }
                                 line = w3j.ReadLine();
                             }
@@ -122,16 +130,19 @@ namespace BJ_Edit
                     this.Func_InitCustomTriggers += (line + Environment.NewLine);
                     while ((line = w3j.ReadLine()).Trim() != "endfunction")
                     {
-                        //剔除在WEonly_Funcs里面的句子
+                        /*
+                        //剔除在WEonly_Funcs里面的句子(bugged)
                         if (WEonly_Funcs.Trim() != "")
                         {
                             bool IsWEonly = false;
                             string FuncName = line.Trim().Substring(5, line.Trim().Length - 7);
-                            string[] WEonly_Funcs_list=WEonly_Funcs.Split(new[] {Environment.NewLine},StringSplitOptions.RemoveEmptyEntries);
+                            string[] WEonly_Funcs_list = WEonly_Funcs.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
                             for (int i = 0; i < WEonly_Funcs_list.Length; i++)
                             { if ("InitTrig_" + WEonly_Funcs_list[i] == FuncName) { IsWEonly = true; } }
-                            if (IsWEonly==false) { this.Func_InitCustomTriggers += (line + Environment.NewLine); }
+                            if (IsWEonly == false) { this.Func_InitCustomTriggers += (line + Environment.NewLine); }
                         }
+                        */
+                        //this.Func_InitCustomTriggers += (line + Environment.NewLine);
                     }
                     this.Func_InitCustomTriggers += (line + Environment.NewLine);
                 }
